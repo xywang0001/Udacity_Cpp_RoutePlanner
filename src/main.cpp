@@ -62,10 +62,15 @@ int main(int argc, const char **argv)
     float end_y;
 
     std::cout << "Please input the values for start_x, start_y, end_x, end_y in order"<<std::endl;
-    std::cin >> start_x;
-    std::cin >> start_y;
-    std::cin >> end_x;
-    std::cin >> end_y;
+    std::cin >> start_x >> start_y >> end_x >> end_y;
+
+    for float pos : {start_x, start_y, end_x, end_y}{
+        if(pos < 0 || pos >100)
+        {
+            std::cout<<"Some inputs are out of range"<<"\n";
+            break;
+        }
+    }
 
 
     // Build Model.
