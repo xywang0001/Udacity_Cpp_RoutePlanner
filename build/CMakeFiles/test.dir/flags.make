@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/workspace/routeplanner/CppND-Route-Planning-Project/thirdparty/pugixml/src -isystem /home/workspace/routeplanner/CppND-Route-Planning-Project/thirdparty/googletest/googletest/include -isystem /home/workspace/routeplanner/CppND-Route-Planning-Project/thirdparty/googletest/googletest
+CXX_INCLUDES = -I/home/xinyu/workspace/routeplanner/CppND-Route-Planning-Project/thirdparty/pugixml/src -isystem /home/xinyu/workspace/routeplanner/CppND-Route-Planning-Project/thirdparty/googletest/googletest/include -isystem /home/xinyu/workspace/routeplanner/CppND-Route-Planning-Project/thirdparty/googletest/googletest
 
 CXX_FLAGS = -std=gnu++17
 
