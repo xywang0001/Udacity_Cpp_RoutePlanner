@@ -64,14 +64,20 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 // - Remove that node from the open_list.
 // - Return the pointer.
 
+// Descending Sequence
+
+bool Compare(RouteModel::Node *node1, RouteModel::Node *node2)
+{
+    return (node1->h_value + node1->g_value)>(node2->h_value+node2->g_value);
+}
+
 RouteModel::Node *RoutePlanner::NextNode() {
 
-    sort(open_list.begin(), open_list.end(), [](const auto &_first, const auto &_second){
-        return ((_first->h_value + _first->g_value)< (_second->h_value + _second->g_value));
-    });
+    std::sort(open_list.begin(), open_list.end(), Compare);
 
-    RouteModel::Node *_next_node = open_list.front();
-    open_list.erase(open_list.begin());//erase() and remove()?
+    RouteModel::Node *_next_node = open_list.back();
+
+    open_list.pop_back();
 
     return _next_node;
 
@@ -88,7 +94,9 @@ RouteModel::Node *RoutePlanner::NextNode() {
 
 std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
     // Create path_found vector
+
     distance = 0.0f;
+
     std::vector<RouteModel::Node> path_found;
 
     // TODO: Implement your solution here.
@@ -96,7 +104,7 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 
     while(current_node->parent != nullptr){
 
-        path_found.emplace_back(*(current_node->parent));
+        path_found.push_back(*(current_node->parent));
         distance += current_node->distance(*(current_node->parent));
         current_node=current_node->parent;
 
@@ -120,7 +128,7 @@ void RoutePlanner::AStarSearch() {
 
     RouteModel::Node *current_node = nullptr;
     start_node->visited = true;
-    open_list.emplace_back(start_node);
+    open_list.push_back(start_node);
 
     while(open_list.size()>0){
         current_node = NextNode();
